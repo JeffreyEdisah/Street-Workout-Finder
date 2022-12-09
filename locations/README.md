@@ -18,7 +18,8 @@ To run this backend, you will need:
 
 2. Create a virtual environment and activate it:
 `$ python -m venv venv`
-`$ source venv/bin/activate`
+- Linux: `$ source venv/bin/activate` 
+- Windows: `$ venv\Scripts\activate` or `.\venv\Scripts\activate.ps1` in Powershell
 
 3. Install the required dependencies:
 `$ pip install -r requirements.txt`
