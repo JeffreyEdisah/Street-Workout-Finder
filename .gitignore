@@ -1,1 +1,2 @@
-locations/venv/
+node_modules
+.env
