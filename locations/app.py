@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_pymongo import PyMongo
 
 
@@ -20,3 +20,30 @@ def hello():
 # Find: db.locations.find()
 # Delete: db.locations.deleteOne({name: "test"})
 # Update: db.locations.updateOne({name: "test"}, {$set: {name: "test2"}})
+
+@app.route("/add", methods = ["POST"])
+def create():
+    location = request.get_json()
+    mongo.db.locations.insertOne(location.to_bson())
+    insertedLocation = mongo.db.locations.find_one_or_404({"id":location["id"]})
+    return insertedLocation[0]
+    
+
+@app.route("/locations/<id>")
+def read():
+    key = request.args.get("id")
+    location = mongo.db.locations.find_one_or_404({"id":id})
+    return location
+
+@app.route("/locations")
+def readall():
+    locations = mongo.db.locations.find()
+    return locations
+
+@app.route("/locations/<id>",methods = ["PUT"])
+def update():
+     updatedLocation = request.get_json
+
+@app.route("/locations/<id>",methods =["DELETE"])
+def delete():
+        mongo.db.locations.delete_one({"id": id})
