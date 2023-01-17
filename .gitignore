@@ -1,1 +1,18 @@
-locations/venv/
+# Ignore Pycache files
+**/__pycache__/**
+
+# Ignore Node.js dependencies
+**/node_modules/
+
+# Ignore Flask app dependencies
+**/venv/
+
+# Ignore MongoDB data and logs
+locations/data/
+*.log
+
+# Ignore React build files
+front/build/
+
+# Ignore VS Code settings
+.vscode/

@@ -8,7 +8,7 @@ To run this backend, you will need:
 
 - [Python 3.6 or later](https://www.python.org/downloads/)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/)
-- [MongoDB](https://www.mongodb.com/)
+- [MongoDB Community Server](https://www.mongodb.com/download-center/community)
 
 ## Getting Started
 
@@ -16,11 +16,18 @@ To run this backend, you will need:
 `$ git clone git@github.com:JeffreyEdisah/Street-Workout-Finder.git`
 `$ cd locations`
 
-2. Install the required dependencies:
-`$ pip install -r requirements.txt`
-TODO Kasimir: create this file
+2. Create a virtual environment and activate it:
+`$ python -m venv venv`
+- Linux: `$ source venv/bin/activate` 
+- Windows: `$ venv\Scripts\activate` or `.\venv\Scripts\activate.ps1` in Powershell
 
-3. Start the backend server:
+3. Install the required dependencies:
+`$ pip install -r requirements.txt`
+
+4. Start the MongoDB server (make sure you have installed MongoDB Community Server):
+`$ mongod`
+
+5. Start the backend server:
 `$ flask run`
 The backend will now be running at [http://localhost:5000](http://localhost:5000).
 
@@ -28,9 +35,7 @@ The backend will now be running at [http://localhost:5000](http://localhost:5000
 
 The backend will expose the following API endpoints (NOT IMPLEMENTED YET):
 
-- `GET /api/v1/spots`: Returns a list of all street workout spots.
-- `GET /api/v1/spots/<spot_id>`: Returns a single street workout
-- `GET /api/v1/spots`: Returns a list of all street workout spots.
+- `GET /api/v1/spots?location=<geolocation>`: Returns a list of all street workout spots within a specified distance from the specified geolocation.
 - `GET /api/v1/spots/<spot_id>`: Returns a single street workout spot with the specified ID.
 - `POST /api/v1/spots`: Creates a new street workout spot.
 - `PUT /api/v1/spots/<spot_id>`: Updates an existing street workout spot with the specified ID.
