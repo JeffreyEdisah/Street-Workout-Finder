@@ -1,0 +1,38 @@
+const stationSchema = new Schema({
+  id: String, // UUID, e.g. "0cdd7bca-39ca-4fca-91ec-ef8f03dc1086"
+  title:  String,
+  image: [String], //Image as Base64 String or link to object storage
+  hours: Date,
+  lastUpdate: { type: Date, default: Date.now },
+  stars: [{stars: Number}], //return all star reviews, calculate average on device
+  address: {
+  	street: String,
+  	city: String,
+  	zipCode: Number
+  },
+  geolocation: {
+    type: {
+      type: String, 
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  } // geolocation is of type GeoJSON: https://mongoosejs.com/docs/geojson.html
+  equipements: [{Equipements: Number/String}],
+  frequency: Number, //on a scale from 0 to 10 or 0 to 100
+  comments: [{ author: String, authorPic: String, body: String, date: Date }] // TODO: define own scheme for comments
+});
+
+const userSchema = new Schema({
+  name:  String,
+  email: String,
+  password: String,
+  profilePic: String,
+  role:  String,
+  lastLogin: { type: Date, default: Date.now },
+  registeredDate: { type: Date, default: Date.now },
+  favoriteStations: [{id: String, addedDate: Date}]
+});
