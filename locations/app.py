@@ -52,3 +52,4 @@ def update(id):
 def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.locations.delete_one({"_id": ObjectId(id)})
+
