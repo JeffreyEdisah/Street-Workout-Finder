@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 import json
 from bson.json_util import dumps
+from bson.objectid import ObjectId
 
 
 app= Flask(__name__)
@@ -31,7 +32,7 @@ def create():
 
 @app.route("/locations/<id>")
 def read(id):
-    location = mongo.db.locations.find_one_or_404({"id":id})
+    location = mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     return dumps(location)
 
 @app.route("/locations")
@@ -42,12 +43,12 @@ def readall():
 @app.route("/locations/<id>",methods = ["PUT"])
 def update(id):
      updatedLocation = request.get_json()
-     mongo.db.locations.find_one_or_404({"id":id})
-     mongo.db.locations.update_one({"id":id}, {set: updatedLocation})
-     location =  mongo.db.locations.find_one_or_404({"id":id})
+     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
+     mongo.db.locations.update_one({"_id": ObjectId(id)}, {set: updatedLocation})
+     location =  mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
      return dumps(location)    
 
 @app.route("/locations/<id>",methods =["DELETE"])
 def delete(id):
-    mongo.db.locations.find_one_or_404({"id":id})
-    mongo.db.locations.delete_one({"id": id})
+    mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
+    mongo.db.locations.delete_one({"_id": ObjectId(id)})
