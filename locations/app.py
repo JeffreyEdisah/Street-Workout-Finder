@@ -14,7 +14,9 @@ def hello():
     # two test operations for mongo (can be deleted)
     mongo.db.locations.insert_one({"name": "test", "lat": 1, "lng": 2}) # insert a document into the collection "locations"
     locations = mongo.db.locations.find({"name": "test"}) # find all documents with the name "test"
-    return locations[0]["name"]
+    mongo.db.equipement.insert_one({"name": "barre de traction", "state": "bon état"})
+    equipement = mongo.db.equipement.find({"name": "barre de traction"})
+    return (locations[0]["name"],equipement[0]["name"])
 
 # MongoDB:
 # I did not create a schema as this is not necessary. Just use the schema from mongoDB-schema.txt for the CRUD operations.
@@ -53,3 +55,31 @@ def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.locations.delete_one({"_id": ObjectId(id)})
 
+@app.route("/equipement/add")
+def createEquipement():
+    currentEquipement = request.get_json()
+    mongo.db.equipement.insert_one(currentEquipement)
+    return dumps(currentEquipement)
+
+@app.route("/equipement/<id>")
+def readEquipement(id):
+    currentEquipement = mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+    return dumps(currentEquipement)
+
+@app.route("/equipement")
+def readEquipement(id):
+    currentEquipements = mongo.db.equipement.find()
+    return dumps(currentEquipements)
+
+@app.route("/locations/<id>",methods = ["PUT"])
+def update(id):
+     updatedEquipement = request.get_json()
+     mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+     mongo.db.equipement.update_one({"_id": ObjectId(id)}, {set: updatedEquipement})
+     currentEquipement =  mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+     return dumps(currentEquipement)    
+
+@app.route("/equipement/<id>")
+def readEquipement(id):
+    mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+    mongo.db.equipement.delete_one({"_id": ObjectId(id)})
