@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from flask_pymongo import PyMongo
 import json
 from bson.json_util import dumps
@@ -6,6 +8,7 @@ from bson.objectid import ObjectId
 from pymongo import GEOSPHERE # for GeoJSON stuff
 
 app= Flask(__name__)
+CORS(app)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/streetWorkoutFinder" # the database name is streetWorkoutFinder, the collection name is "locations". The database and collection are created automatically when you insert the first document (if it does not exist).
 mongo = PyMongo(app)
 
@@ -56,7 +59,7 @@ def create():
 # find locations around a given coordinate
 # GET request with parameters lon (longitude), lat (latitude) and maxDst (maximum search distance)
 # example: /locations/findByCoords?lon=5.4443387&lat=43.3444461&maxDst=10000
-@app.route('/locations/findByCoords')
+@app.route('/locations/findByCoords', methods = ['GET'])
 def findLocationsByCoords():
     lon = request.args.get('lon', type=float)
     lat = request.args.get('lat', type=float)
@@ -66,7 +69,7 @@ def findLocationsByCoords():
         dst = request.args.get('maxDst', type=int)
     
     query = {"location": {"$nearSphere": { "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
-    mongoResults = dumps(mongo.db.locations.find(query))
+    mongoResults = dumps(list(mongo.db.locations.find(query)))
     return mongoResults
 
 # find location by its OID
