@@ -2,6 +2,9 @@ const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const passport = require('passport')
+
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 // @desc    Register new user
 // @route   POST /api/users
@@ -89,4 +92,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  generateToken
 }
