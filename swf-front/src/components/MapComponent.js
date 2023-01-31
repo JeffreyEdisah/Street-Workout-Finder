@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup, LeafletMap } from "react-leaflet";
 
-import { getAllLocations } from './../services/locationService'
+import { getAllLocations } from '../services/locationService'
 
 function MapComponent() {
 
