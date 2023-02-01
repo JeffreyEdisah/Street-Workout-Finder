@@ -14,23 +14,23 @@ function Login() {
         
         <div className="p-10 mb-10">
 
-          <div className='mb-10 mt-10'>Se connecter à l'aide de : </div>
-            <div className='p-10 mb-10'>
+          <div className='mb-10 mt-10 left'>Se connecter à l'aide de : </div>
+            <div className='p-10 mb-10 gridAuthGandF'>
+
+            <div className="mt-5">
+              <GoogleComp/>
+            </div>
 
             <div className="">
-              <GoogleComp className=""/>
+              <FacebookComp />
             </div>
 
-            <div className="">
-              <FacebookComp className=""/>
-            </div>
-
+          </div>
+            <div className="mb-5">
+              <InputField name="Mail" type="email" className="inputLogo Email fontInter"/>
             </div>
             <div className="mb-5">
-              <InputField text="Mail" className="inputLogo Email fontInter"/>
-            </div>
-            <div className="mb-5">
-              <InputField text="Mot de passe" className="inputLogo Password fontInter"/>
+              <InputField name="Mot de passe" type="password" className="inputLogo Password fontInter"/>
             </div>
           </div>
         </div>
