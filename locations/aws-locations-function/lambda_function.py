@@ -83,6 +83,7 @@ def delete(id):
 ################################
 # Request handling starts here #
 ################################
+
 def lambda_handler(event, context):
     try:
         client.admin.command('ping') # The ping command is cheap and does not require auth.

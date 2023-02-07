@@ -1,0 +1,194 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.leaflet-container{
+
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  background-color: rgba(34, 31, 31, 1);
+  padding: 50px;
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 80%;
+  color: white;
+  font-family: Inter;
+}
+
+@font-face {
+  font-family:Inter;
+  src:url(./fonts/static/Inter-Regular.ttf);
+}
+@font-face {
+  font-family:Audiowide;
+  src:url(./fonts/static/Audiowide-Regular.ttf);
+}
+
+/* InputField */
+
+.fontInter {
+  font-family: Inter;
+}
+
+input {
+  box-sizing: border-box;
+  border: 2px solid rgba(34, 31, 31, 1);
+  font-size: 16px;
+  outline: none;
+  background-color: white;
+  border-radius: 10px;
+}
+
+
+
+input.inputLogo {
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+input[type=password].Password {
+  background-image: url('./images/key.svg');
+  background-position-x: -1px;
+}
+
+input[type=text].utilisateur {
+  background-image: url('./images/person.svg');
+  background-position-x: -2px;
+}
+
+input[type=email].Email {
+  background-image: url('./images/mail.svg');
+  background-position-x: -2px;
+}
+
+.p-10{
+  padding: 10%;
+}
+
+.p-5{
+  padding: 5%;
+}
+
+.mb-5{
+  margin-bottom: 5%;
+}
+
+.mb-10{
+  margin-bottom: 10%;
+}
+
+.mt-10 {
+  margin-top: 10%;
+}
+
+.mt-15 {
+  margin-top: 15%;
+}
+
+.mt-7 {
+  margin-top: 7%;
+}
+
+.mt-2 {
+  margin-top: 2%;
+}
+
+.mt-5 {
+  margin-top: 5%;
+}
+
+.ml-5 {
+  margin-left: 5%;
+}
+
+.mr-5 {
+  margin-right: 5%;
+}
+
+.sideBySide {
+  float:left;
+}
+
+
+.button {
+  border-radius: 10px;
+  padding: 10px 18px;
+}
+
+.RedToYellow {
+    border-color: linear-gradient(to right, yellow, red);
+}
+
+#logo {
+  font-family: Audiowide;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 64px;
+  /* logo dégradé */
+
+  background: linear-gradient(to left, #ea0202 40%, #ff7b00 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.gridAuthGandF {
+  width: 200px;
+  display: grid;
+  grid-template-areas: "a a";
+}

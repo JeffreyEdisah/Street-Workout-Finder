@@ -1,12 +1,27 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from flask_pymongo import PyMongo
 import json
 from bson.json_util import dumps
 from bson.objectid import ObjectId
+from pymongo import GEOSPHERE # for GeoJSON stuff
 
+import os
 
-app= Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/streetWorkoutFinder" # the database name is streetWorkoutFinder, the collection name is "locations". The database and collection are created automatically when you insert the first document (if it does not exist).
+# Mongo Configuration
+mongoUsername = 'swfDatabaseUser'
+mongoPassword = os.environ.get('SWF_MONGO_PASSWORD')
+mongoDatabase = 'streetWorkoutFinder'
+
+# other config
+defaultMaxDistance = 10000 # default distance to search in geospatial search (in meters)
+
+# Flask initialisation
+app = Flask(__name__)
+CORS(app)
+# app.config["MONGO_URI"] = "mongodb://localhost:27017/streetWorkoutFinder" # the database name is streetWorkoutFinder, the collection name is "locations". The database and collection are created automatically when you insert the first document (if it does not exist).
+app.config["MONGO_URI"] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.rqrjnrv.mongodb.net/' + mongoDatabase+ '?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
 @app.route("/")
@@ -18,30 +33,46 @@ def hello():
     equipement = mongo.db.equipement.find({"name": "barre de traction"})
     return (locations[0]["name"],equipement[0]["name"])
 
-# MongoDB:
-# I did not create a schema as this is not necessary. Just use the schema from mongoDB-schema.txt for the CRUD operations.
-# use db.locations to access the locations collection in the database streetWorkoutFinder
-# Insert: db.locations.insertOne({name: "test", lat: 1, lng: 2})
-# Find: db.locations.find()
-# Delete: db.locations.deleteOne({name: "test"})
-# Update: db.locations.updateOne({name: "test"}, {$set: {name: "test2"}})
+####################
+# CRUD starts here #
+####################
 
+# add a new item to the database
 @app.route("/locations/add", methods = ["POST"])
 def create():
     location = request.get_json()
     mongo.db.locations.insert_one(location)
     return dumps(location)
 
-@app.route("/locations/<id>")
+# find locations around a given coordinate
+# GET request with parameters lon (longitude), lat (latitude) and maxDst (maximum search distance)
+# example: /locations/findByCoords?lon=5.4443387&lat=43.3444461&maxDst=10000
+@app.route('/locations/findByCoords', methods = ['GET'])
+def findLocationsByCoords():
+    lon = request.args.get('lon', type=float)
+    lat = request.args.get('lat', type=float)
+    if request.args.get('maxDst') == None:
+        dst = defaultMaxDistance
+    else:
+        dst = request.args.get('maxDst', type=int)
+    
+    query = {"location": {"$nearSphere": { "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
+    mongoResults = dumps(list(mongo.db.locations.find(query)))
+    return mongoResults
+
+# find location by its OID
+@app.route("/locations/findByID/<id>")
 def read(id):
     location = mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     return dumps(location)
 
+# output all locations
 @app.route("/locations")
 def readall():
     locations = mongo.db.locations.find()
     return dumps(locations)
 
+# update a location (identified by OID)
 @app.route("/locations/<id>",methods = ["PUT"])
 def update(id):
      updatedLocation = request.get_json()
@@ -50,6 +81,7 @@ def update(id):
      location =  mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
      return dumps(location)    
 
+# delete a location (identified by OID)
 @app.route("/locations/<id>",methods =["DELETE"])
 def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
