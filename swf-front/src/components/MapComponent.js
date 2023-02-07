@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, useMap, Marker, Popup, LeafletMap } from "reac
 import { getAllLocations } from '../services/locationService'
 
 function MapComponent() {
-
 // TODO re-do this entire file using react-leaflets useMap and useMapEvents!!!!
 
   const centraleMarseilleCoords = [43.342700, 5.436710];
