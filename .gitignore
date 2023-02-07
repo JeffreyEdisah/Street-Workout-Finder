@@ -1,3 +1,6 @@
+node_modules
+.env
+
 # Ignore Pycache files
 **/__pycache__/**
 
@@ -16,3 +19,7 @@ front/build/
 
 # Ignore VS Code settings
 .vscode/
+
+# Ignore AWS Lambda deployment packages
+**/package/
+**/my-deployment-package.zip
