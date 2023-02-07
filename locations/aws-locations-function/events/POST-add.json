@@ -1,0 +1,37 @@
+{
+    "version": "2.0",
+    "routeKey": "POST /locations/add",
+    "rawPath": "/locations/add",
+    "rawQueryString": "",
+    "headers": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br",
+      "content-length": "0",
+      "host": "6awv2ej4h9.execute-api.eu-central-1.amazonaws.com",
+      "postman-token": "acbb0816-5b9c-479a-a457-cc4f5d07e13d",
+      "user-agent": "PostmanRuntime/7.30.0",
+      "x-amzn-trace-id": "Root=1-63e28edd-570e49f371d1995f2ef95860",
+      "x-forwarded-for": "130.83.73.88",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https"
+    },
+    "requestContext": {
+      "accountId": "252340587540",
+      "apiId": "6awv2ej4h9",
+      "domainName": "6awv2ej4h9.execute-api.eu-central-1.amazonaws.com",
+      "domainPrefix": "6awv2ej4h9",
+      "http": {
+        "method": "POST",
+        "path": "/locations/add",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "130.83.73.88",
+        "userAgent": "PostmanRuntime/7.30.0"
+      },
+      "requestId": "f-tCshdlFiAEJDw=",
+      "routeKey": "POST /locations/add",
+      "stage": "$default",
+      "time": "07/Feb/2023:17:48:13 +0000",
+      "timeEpoch": 1675792093809
+    },
+    "isBase64Encoded": 0
+  }

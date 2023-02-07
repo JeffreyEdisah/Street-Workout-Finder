@@ -24,36 +24,14 @@ CORS(app)
 app.config["MONGO_URI"] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.rqrjnrv.mongodb.net/' + mongoDatabase+ '?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
-
-# Index page
-@app.route('/')
-def index():
-    return 'Nothing to see here'
-
-# initialise MongoDB easily by accessing this route -> creates an index that is necessary for geospatial search
-@app.route('/admin/firstMongoLaunch')
-def create2dGeosphereIndex():
-    mongoResponse = mongo.db.locations.create_index([("location", GEOSPHERE)])
-    return 'Index created: ' + mongoResponse
-
-@app.route('/admin/test/insertSomeMongoData')
-def insertSomeData():
-    # only execute once - else you get duplicates
-    fitnessCoordsMarseille= [[43.2607753, 5.3735325], [43.3444461, 5.4331751], [43.292049, 5.400078], [43.2895241, 5.3702871], [43.2378017, 5.4033233], [43.2982242, 5.490455], [43.2603959, 5.3739465], [43.2820833, 5.3918312], [43.2820623, 5.3918667], [43.2820364, 5.3918902], [43.2820714, 5.3917366], [43.2819821, 5.3918838], [43.3399445, 5.4443387], [43.2685186, 5.4186736], [43.3124955, 5.4239761], [43.3574542, 5.3528942], [43.3578637, 5.3526113], [43.3593869, 5.3511656], [43.3595282, 5.3513156], [43.3595231, 5.3509145], [43.3589539, 5.3500401], [43.3529229, 5.3781548]]
-    franceCityCoords =  [[48.8566969, 2.3514616], [45.764043, 4.835659], [43.604652, 1.444209],[44.837789, -0.57918], [47.218371, -1.553621]]
-    # for i, coords in enumerate(fitnessCoordsMarseille):
-    #     entry = {
-    #         "name": "Fitness-Station #{}".format(i),
-    #         "location": {
-    #             "type": "Point",
-    #             "coordinates": [
-    #                 coords[1], coords[0]
-    #             ]
-    #         }
-    #     }
-    #     mongo.db.locations.insert_one(entry) # insert a document into the collection "locations"
-    locations = mongo.db.locations.find({"name": "city"}) # find all documents with the name "test"
-    return locations[0]["name"]
+@app.route("/")
+def hello():
+    # two test operations for mongo (can be deleted)
+    mongo.db.locations.insert_one({"name": "test", "lat": 1, "lng": 2}) # insert a document into the collection "locations"
+    locations = mongo.db.locations.find({"name": "test"}) # find all documents with the name "test"
+    mongo.db.equipement.insert_one({"name": "barre de traction", "state": "bon état"})
+    equipement = mongo.db.equipement.find({"name": "barre de traction"})
+    return (locations[0]["name"],equipement[0]["name"])
 
 ####################
 # CRUD starts here #
@@ -109,3 +87,31 @@ def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.locations.delete_one({"_id": ObjectId(id)})
 
+@app.route("/equipement/add")
+def createEquipement():
+    currentEquipement = request.get_json()
+    mongo.db.equipement.insert_one(currentEquipement)
+    return dumps(currentEquipement)
+
+@app.route("/equipement/<id>")
+def readEquipement(id):
+    currentEquipement = mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+    return dumps(currentEquipement)
+
+@app.route("/equipement")
+def readEquipement(id):
+    currentEquipements = mongo.db.equipement.find()
+    return dumps(currentEquipements)
+
+@app.route("/locations/<id>",methods = ["PUT"])
+def update(id):
+     updatedEquipement = request.get_json()
+     mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+     mongo.db.equipement.update_one({"_id": ObjectId(id)}, {set: updatedEquipement})
+     currentEquipement =  mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+     return dumps(currentEquipement)    
+
+@app.route("/equipement/<id>")
+def readEquipement(id):
+    mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
+    mongo.db.equipement.delete_one({"_id": ObjectId(id)})
