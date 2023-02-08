@@ -1,5 +1,6 @@
 import React from 'react'
 import InputField from '../components/InputField'
+import {BsArrowLeftShort} from 'react-icons/bs'
 import Button from '../components/Button'
 import Logo from '../components/Logo'
 import GoogleComp from '../components/googleComp'
@@ -8,6 +9,9 @@ import FacebookComp from '../components/facebookComp'
 function Login() {
   return (
     <>
+
+      <BsArrowLeftShort size={30}/>
+
       <div className='center mt-15 mb-7'>
 
         <Logo />

@@ -1,4 +1,5 @@
 import React from 'react'
+import {BsArrowLeftShort} from 'react-icons/bs'
 import InputField from '../components/InputField'
 import Button from '../components/Button'
 import Logo from '../components/Logo'
@@ -9,6 +10,9 @@ import FacebookComp from '../components/facebookComp'
 function Register() {
   return (
     <>
+      
+      <BsArrowLeftShort size={30}/>
+
       <div className='center mt-15 mb-7'>
 
         <Logo />
