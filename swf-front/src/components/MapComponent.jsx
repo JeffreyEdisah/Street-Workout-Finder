@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup, LeafletMap } from "react-leaflet";
 
-import { getAllLocations } from '../services/locationService'
+import { getLocationsByCoords } from '../services/locationService'
 
 function MapComponent() {
 // TODO re-do this entire file using react-leaflets useMap and useMapEvents!!!!
@@ -19,7 +19,7 @@ function MapComponent() {
       navigator.geolocation.getCurrentPosition(
         position => {
           setUserCoords([position.coords.latitude, position.coords.longitude]);
-          getAllLocations(position.coords.longitude, position.coords.latitude, maxSearchDistance).then((allLocationsAroundMe) => {
+          getLocationsByCoords(position.coords.longitude, position.coords.latitude, maxSearchDistance).then((allLocationsAroundMe) => {
             let resultJSON = JSON.parse(allLocationsAroundMe)
             resultJSON.map(station => {
               console.log("station: " + station.location.coordinates.reverse());

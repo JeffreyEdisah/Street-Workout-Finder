@@ -19,3 +19,7 @@ front/build/
 
 # Ignore VS Code settings
 .vscode/
+
+# Ignore AWS Lambda deployment packages
+**/package/
+**/my-deployment-package.zip

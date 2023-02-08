@@ -1,0 +1,41 @@
+{
+    "version": "2.0",
+    "routeKey": "GET /locations/findByCoords",
+    "rawPath": "/locations/findByCoords",
+    "rawQueryString": "lon=4.5&lat=49.5",
+    "headers": {
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br",
+      "content-length": "0",
+      "host": "6awv2ej4h9.execute-api.eu-central-1.amazonaws.com",
+      "postman-token": "82ee7700-12ce-4b71-b19e-431f3688fe48",
+      "user-agent": "PostmanRuntime/7.30.0",
+      "x-amzn-trace-id": "Root=1-63e28b13-2bdb2bf44251374a3de49ee4",
+      "x-forwarded-for": "130.83.73.88",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https"
+    },
+    "queryStringParameters": {
+      "lat": "49.5",
+      "lon": "4.5"
+    },
+    "requestContext": {
+      "accountId": "252340587540",
+      "apiId": "6awv2ej4h9",
+      "domainName": "6awv2ej4h9.execute-api.eu-central-1.amazonaws.com",
+      "domainPrefix": "6awv2ej4h9",
+      "http": {
+        "method": "GET",
+        "path": "/locations/findByCoords",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "130.83.73.88",
+        "userAgent": "PostmanRuntime/7.30.0"
+      },
+      "requestId": "f-qrEgqCFiAEJ2A=",
+      "routeKey": "GET /locations/findByCoords",
+      "stage": "$default",
+      "time": "07/Feb/2023:17:32:03 +0000",
+      "timeEpoch": 1675791123426
+    },
+    "isBase64Encoded": 0
+  }

@@ -1,0 +1,6 @@
+POST /locations/add → swf-locations-service (Lambda)
+GET /locations/findByCoords → swf-locations-service (Lambda)
+GET /locations/findByID → swf-locations-service (Lambda)
+GET /locations/findAll → swf-locations-service (Lambda)
+PUT /locations → swf-locations-service (Lambda)
+DELETE /locations → swf-locations-service (Lambda)
