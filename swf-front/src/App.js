@@ -15,7 +15,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path='/' element={<MapCompontentTest />}/>
+          <Route path='/' element={<MapComponentTest />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
