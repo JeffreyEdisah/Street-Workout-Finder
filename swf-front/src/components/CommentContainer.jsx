@@ -1,11 +1,14 @@
 import React from 'react';
 import Comment from '../components/Comment'
 
-function CommentContainer(props) {
+function CommentContainer(comments){
+  const listComments = comments.map(comment =>
+    <Comment key={comment.id} avatar={comment.avatar} pseudo={comment.pseudo} comment={comment.text}/>
+    )
 
     return (
-      <div>
-        <Comment pseudo="pseudo" comment="Comment" />
+      <div className='tag-container'>
+        {listTags}
       </div>
     )
   }

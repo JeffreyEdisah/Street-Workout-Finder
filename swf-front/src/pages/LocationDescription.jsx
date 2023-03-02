@@ -5,9 +5,11 @@ import CommentContainer from "../components/CommentContainer";
 
 function LocationDescription(props){
     return(
-        <div>
+        <div className="location-page">
             <Head />
+            <hr />
             <TagContainer />
+            <hr />
             <CommentContainer />
         </div>
     );

@@ -1,11 +1,14 @@
 import React from 'react';
 import Tag from '../components/Tag'
 
-function TagContainer(props){
+function TagContainer(tags){
+  const listTags = tags.map(tag =>
+    <Tag key={tag.id} equipement={tag.name} />
+    )
 
     return (
       <div className='tag-container'>
-        <Tag equipement="barres parallèles" />
+        {listTags}
       </div>
     )
   }

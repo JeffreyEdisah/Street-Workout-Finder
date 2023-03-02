@@ -193,17 +193,14 @@ input[type=email].Email {
   grid-template-areas: "a a";
 }
 
-/* Location Page CSS */
 
-/*
-body {
+.location-page {
   background: #221F1F;
   font: 14px "Lato", Futura, sans-serif;
   font-style: semiBold;
   margin: 20px;
   color: white;
 }
-*/
 
 .tag {
   background: #363636;
