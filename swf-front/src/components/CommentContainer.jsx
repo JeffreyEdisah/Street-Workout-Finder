@@ -8,7 +8,7 @@ function CommentContainer(comments){
 
     return (
       <div className='tag-container'>
-        {listTags}
+        {/* {listTags} */}
       </div>
     )
   }
