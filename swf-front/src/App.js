@@ -2,11 +2,10 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 
 // Components
-import MapCompontent from './components/MapComponent';
-import MapCompontentTest from './components/MapComponentTest';
+import MapCompontent from './components/MapComponent'
+import MapCompontentTest from './components/MapComponentTest'
 import Login from './pages/Login';
 import Register from './pages/Register';
-import menuComponent from './components/menuComponent';
 
 function App() {
   return (
