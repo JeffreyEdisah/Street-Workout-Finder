@@ -2,12 +2,13 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
 
 // Components
-import MapComponent from './components/MapComponent'
+import MapComponent from './components/MapComponent';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
 import { Provider } from 'react-redux';
-import { store } from './app/store'
+import { store } from './app/store';
+import MenuComponent from './components/MenuComponent'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
+          <Route path='/menu' element={<MenuComponent />}/>
         </Routes>
       </Router>
     </Provider>
