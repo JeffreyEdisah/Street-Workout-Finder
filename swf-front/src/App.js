@@ -10,6 +10,8 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import MenuComponent from './components/MenuComponent'
 
+const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
+
 function App() {
   return (
     <>
@@ -20,7 +22,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
-          <Route path='/menu' element={<MenuComponent />}/>
+          <Route path='/menu' element={<MenuComponent  menuItems={settingsItems} /> }/>
         </Routes>
       </Router>
     </Provider>
