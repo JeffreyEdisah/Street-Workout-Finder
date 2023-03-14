@@ -19,12 +19,15 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path='/' element={<MapComponent />}/>
+          <Route path='/' element={<div><div className='map_box'><MapComponent /></div> <div className='menu_box'> <MenuComponent  menuItems={settingsItems} /> </div></div>}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
+<<<<<<< Updated upstream
           <Route path='/menu' element={<MenuComponent  menuItems={settingsItems} /> }/>
           <Route path='/location' element={<LocationDescription />}/>
+=======
+>>>>>>> Stashed changes
         </Routes>
       </Router>
     </Provider>

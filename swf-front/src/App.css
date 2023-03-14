@@ -45,8 +45,8 @@
 
 body {
   background-color: rgba(34, 31, 31, 1);
-  padding: 50px;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
   max-width: 48rem;
   width: 80%;
   color: white;
@@ -256,4 +256,15 @@ object-fit: cover;
 .common-intel{
 display: flex;
 justify-content: space-between;
+}
+
+.map_box{
+  z-index: 1;
+}
+
+.menu_box{
+  z-index: 400;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
