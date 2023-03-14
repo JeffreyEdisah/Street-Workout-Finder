@@ -6,6 +6,7 @@ import MapComponent from './components/MapComponent';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Logout from './pages/Logout';
+import LocationDescription from './pages/LocationDescription'
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import MenuComponent from './components/MenuComponent'
@@ -23,6 +24,7 @@ function App() {
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
           <Route path='/menu' element={<MenuComponent  menuItems={settingsItems} /> }/>
+          <Route path='/location' element={<LocationDescription />}/>
         </Routes>
       </Router>
     </Provider>
