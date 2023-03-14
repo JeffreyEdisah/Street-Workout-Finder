@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 from pymongo import GEOSPHERE # for GeoJSON stuff
+from auth_middleware import token_required
 
 import os
 
@@ -22,6 +23,10 @@ CORS(app)
 app.config["MONGO_URI"] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.cri1oxc.mongodb.net/?retryWrites=true&w=majority'
 mongo = PyMongo(app).cx[mongoDatabase]
 
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'this is a secret'
+print(SECRET_KEY)
+app.config['SECRET_KEY'] = SECRET_KEY
+
 @app.route("/")
 def hello():
     # two test operations for mongo (can be deleted)
@@ -37,6 +42,8 @@ def hello():
 
 # add a new item to the database
 @app.route("/locations/add", methods = ["POST"])
+@token_required
+@token_required
 def create():
     location = request.get_json()
     mongo.db.locations.insert_one(location)
@@ -72,6 +79,7 @@ def readall():
 
 # update a location (identified by OID)
 @app.route("/locations/<id>",methods = ["PUT"])
+@token_required
 def update(id):
      updatedLocation = request.get_json()
      mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
@@ -81,11 +89,13 @@ def update(id):
 
 # delete a location (identified by OID)
 @app.route("/locations/<id>",methods =["DELETE"])
+@token_required
 def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.locations.delete_one({"_id": ObjectId(id)})
 
 @app.route("/equipement/add", methods = ["POST"])
+@token_required
 def createEquipement():
     currentEquipement = request.get_json()
     mongo.db.equipement.insert_one(currentEquipement)
@@ -102,6 +112,7 @@ def readEquipements():
     return dumps(currentEquipements)
 
 @app.route("/locations/<id>",methods = ["PUT"])
+@token_required
 def updateEquipement(id):
      updatedEquipement = request.get_json()
      mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
