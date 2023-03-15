@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
+import locationHandler from '../locationHandler'
 
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'))
@@ -47,6 +48,19 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout()
 })
 
+// Login user
+export const addLocationWithcoordinates = createAsyncThunk('auth/addLocationWithcoordinates', async (locationData, thunkAPI) => {
+  try {
+    return await locationHandler.addLocationWithcoordinates(locationData)
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -90,6 +104,20 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null
+      })
+      .addCase(addLocationWithcoordinates.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addLocationWithcoordinates.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.locationData = action.payload
+      })
+      .addCase(addLocationWithcoordinates.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.locationData = null
       })
   },
 })

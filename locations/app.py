@@ -43,7 +43,6 @@ def hello():
 # add a new item to the database
 @app.route("/locations/add", methods = ["POST"])
 @token_required
-@token_required
 def create():
     location = request.get_json()
     mongo.db.locations.insert_one(location)

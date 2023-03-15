@@ -10,6 +10,7 @@ import LocationDescription from './pages/LocationDescription'
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import MenuComponent from './components/MenuComponent'
+import AddLocation from './pages/AddLocation'
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
 
@@ -23,11 +24,9 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
-<<<<<<< Updated upstream
           <Route path='/menu' element={<MenuComponent  menuItems={settingsItems} /> }/>
           <Route path='/location' element={<LocationDescription />}/>
-=======
->>>>>>> Stashed changes
+          <Route path='/addlocation' element={<AddLocation />} />
         </Routes>
       </Router>
     </Provider>
