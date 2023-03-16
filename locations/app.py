@@ -59,8 +59,8 @@ def findLocationsByCoords():
         dst = defaultMaxDistance
     else:
         dst = request.args.get('maxDst', type=int)
-    
-    query = {"location": {"$nearSphere": { "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
+    mongo.db.locations.create_index([("geolocation", GEOSPHERE)])
+    query = {"geolocation": {"$nearSphere": {"type":"Point", "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
     mongoResults = dumps(list(mongo.db.locations.find(query)))
     return mongoResults
 
