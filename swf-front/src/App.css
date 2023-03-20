@@ -232,6 +232,7 @@ object-fit: cover;
 }
 
 .commentText{
+font-family: 'Inter';
 display: block;
 margin-top: 0;
 }
@@ -239,6 +240,10 @@ margin-top: 0;
 .description-location{
 width: 100%;
 height: auto;
+}
+
+.description-location h1{
+  font-family: 'Josefin Sans';
 }
 
 .image-container{
@@ -256,6 +261,7 @@ object-fit: cover;
 .common-intel{
 display: flex;
 justify-content: space-between;
+font-family: 'Lato';
 }
 
 .map_box{
