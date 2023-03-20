@@ -5,7 +5,7 @@ function Head(props) {
     return (
       <div className='description-location'>
       <div className='image-container'>
-        {/* <img src={require("./RCO075_1605492406.jpg")}/> */}
+        {/* <img src={require("../images/location_placeholder.jpg")}/> */}
       </div>
       <h1>Nom du lieu</h1>
       <p>Adresse du lieu</p>

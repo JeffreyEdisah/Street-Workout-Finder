@@ -22,8 +22,8 @@ function MapComponent() {
           getLocationsByCoords(position.coords.longitude, position.coords.latitude, maxSearchDistance).then((allLocationsAroundMe) => {
             let resultJSON = JSON.parse(allLocationsAroundMe)
             resultJSON.map(station => {
-              console.log("station: " + station.location.coordinates.reverse());
-              setFitnessStationsAroundMe(prevStations => [...prevStations, station.location.coordinates.reverse()])
+            console.log("station: " + station.geolocation.coordinates.reverse());
+            setFitnessStationsAroundMe(prevStations => [...prevStations, station.geolocation.coordinates.reverse()])
             });
           });
         },
