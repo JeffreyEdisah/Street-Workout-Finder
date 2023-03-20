@@ -12,7 +12,7 @@ function Menu(props) {
   
       return (
         <div className="menu">
-          <button><img
+          <button className='menu_button'><img
             src={menuIcon}
             alt="Menu"
             onClick={handleMenuClick}

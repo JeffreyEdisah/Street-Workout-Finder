@@ -9,8 +9,9 @@ import Logout from './pages/Logout';
 import LocationDescription from './pages/LocationDescription'
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import MenuComponent from './components/MenuComponent'
-import AddLocation from './pages/AddLocation'
+import MenuComponent from './components/MenuComponent';
+import SearchBar from './components/SearchBar';
+import AddTool from './components/AddTool';
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
 
@@ -20,13 +21,11 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path='/' element={<div><div className='map_box'><MapComponent /></div> <div className='menu_box'> <MenuComponent  menuItems={settingsItems} /> </div></div>}/>
+          <Route path='/' element={<div> <MapComponent /> <MenuComponent  menuItems={settingsItems} /> <SearchBar/> <AddTool/> </div>}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
-          <Route path='/menu' element={<MenuComponent  menuItems={settingsItems} /> }/>
           <Route path='/location' element={<LocationDescription />}/>
-          <Route path='/addlocation' element={<AddLocation />} />
         </Routes>
       </Router>
     </Provider>
