@@ -10,7 +10,7 @@ const addLocationWithcoordinates = async (locationData) => {
         },
     }
 
-    const response = await axios.post(API_URL, {name: locationData.name, address: {street: locationData.street, city: locationData.city, zipCode: locationData.zipCode}, geolocation: {type: "Point", coordinates: [locationData.longitude, locationData.latitude]}}, config)
+    const response = await axios.post(API_URL, {name: locationData.name, address: {street: locationData.street, city: locationData.city, zipCode: locationData.zipCode, equipment: locationData.equipment}, geolocation: {type: "Point", coordinates: [locationData.longitude, locationData.latitude]}}, config)
 
 }
 

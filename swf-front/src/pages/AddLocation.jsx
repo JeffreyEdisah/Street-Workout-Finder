@@ -12,10 +12,11 @@ function AddLocation() {
     name: '',
     street: '',
     city: '',
-    zipCode: ''
+    zipCode: '',
+    equipment: '',
   })
 
-  const { name, street, city, zipCode } = formData
+  const { name, street, city, zipCode, equipment } = formData
 
   const { locationData, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -57,6 +58,7 @@ function AddLocation() {
         street: street,
         city: city,
         zipCode: zipCode,
+        equipment: equipment,
         longitude: longitude,
         latitude: latitude,
       }
@@ -82,6 +84,9 @@ function AddLocation() {
         </div>
         <div className="mb-5">
           <InputField name="zipCode" type="text" className="inputLogo fontInter" value={zipCode} onChange={onChange} />
+        </div>
+        <div className="mb-5">
+          <InputField name="equipment" type="text" className="inputLogo fontInter" value={equipment} onChange={onChange} />
         </div>
         <div className="mb-10 mt-10 left">
           <div className='right'>

@@ -28,6 +28,7 @@ function App() {
           <Route path='/logout' element={<Logout />}/>
           <Route path='/location' element={<LocationDescription />}/>
           <Route path='/addlocation' element={<AddLocation />} />
+          <Route path="/location/:id" element={<LocationDescription />} exact />
         </Routes>
       </Router>
     </Provider>
