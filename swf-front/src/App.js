@@ -9,9 +9,9 @@ import Logout from './pages/Logout';
 import LocationDescription from './pages/LocationDescription'
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import MenuComponent from './components/MenuComponent';
 import SearchBar from './components/SearchBar';
 import AddTool from './components/AddTool';
+import SlidingMenu from './components/SlidingMenu';
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
 
@@ -21,7 +21,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path='/' element={<div> <MapComponent /> <MenuComponent  menuItems={settingsItems} /> <SearchBar/> <AddTool/> </div>}/>
+          <Route path='/' element={<div> <MapComponent /> <SlidingMenu/> <SearchBar/> <AddTool/> </div>}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>

@@ -297,3 +297,72 @@ font-family: 'Lato';
   background-position: 15px center;
   font-size: 16px;
 }
+
+.sliding-menu-container {
+  position: relative;
+}
+
+.open-menu-button {
+  position: fixed;
+  top: 10px;
+  right: 25px;
+  z-index: 800;
+  border-radius: 25%;
+  padding: 0;
+  border-color: white;
+}
+
+.sliding-menu {
+  position: fixed;
+  top: 0;
+  right: -50%;
+  height: 100%;
+  width: 50%;
+  background-color: black;
+  z-index: 9998;
+  transition: all 0.3s ease-out;
+}
+
+.sliding-menu.open {
+  right: 0;
+}
+
+.menu-header {
+  margin-top: 0;
+  height: 30px;
+  background-color:black;
+}
+
+.close-menu-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border: none
+}
+
+.menu-item{
+  background-color: #363636;
+  text-align: end;
+  height: 76px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  right: 8%;
+  
+
+}
+
+.red-cross{
+  color: white;
+}
+
+#suppression{
+  bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
