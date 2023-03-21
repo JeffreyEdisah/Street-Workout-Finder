@@ -9,9 +9,9 @@ import Logout from './pages/Logout';
 import LocationDescription from './pages/LocationDescription'
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import MenuComponent from './components/MenuComponent';
 import SearchBar from './components/SearchBar';
 import AddTool from './components/AddTool';
+import SlidingMenu from './components/SlidingMenu';
 import AddLocation from './pages/AddLocation'
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
@@ -19,19 +19,19 @@ const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Lo
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <Router>
-          <Routes>
-            <Route path='/' element={<div> <MapComponent /> <MenuComponent menuItems={settingsItems} /> <SearchBar /> <AddTool /> </div>} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/logout' element={<Logout />} />
-            <Route path='/location' element={<LocationDescription />} />
-            <Route path='/addlocation' element={<AddLocation />} />
-            <Route path="/location/:id" element={<LocationDescription />} exact />
-          </Routes>
-        </Router>
-      </Provider>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path='/' element={<div> <MapComponent /> <SlidingMenu/> <SearchBar/> <AddTool/> </div>}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
+          <Route path='/logout' element={<Logout />}/>
+          <Route path='/location' element={<LocationDescription />}/>
+          <Route path='/addlocation' element={<AddLocation />} />
+          <Route path="/location/:id" element={<LocationDescription />} exact />
+        </Routes>
+      </Router>
+    </Provider>
     </>
   );
 }

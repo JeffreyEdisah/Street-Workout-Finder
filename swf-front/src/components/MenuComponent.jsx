@@ -1,4 +1,4 @@
-import React,  { useState } from 'react';
+import React, { useState } from 'react';
 import menuIcon from '../images/charm_menu-hamburger.svg';
 
 
