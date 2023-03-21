@@ -9,6 +9,7 @@ import { register, reset } from '../services/auth/authSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 
 
 function Register() {
@@ -67,7 +68,9 @@ function Register() {
   return (
     <>
       
-      <BsArrowLeftShort size={30}/>
+      <Link to={"/"}>
+        <BsArrowLeftShort size={30} />
+      </Link>
 
       <div className='center mt-15 mb-7'>
 

@@ -4,13 +4,13 @@ import TagContainer from "../components/TagContainer";
 import CommentContainer from "../components/CommentContainer";
 import { useLocation } from "react-router-dom";
 
-function LocationDescription(props){
+function LocationDescription(props) {
 
     const { state } = useLocation();
 
     console.log("state : ", state);
 
-    return(
+    return (
         <div className="location-page">
             <div>
                 <strong>Id:</strong> {state.id}{" "}
