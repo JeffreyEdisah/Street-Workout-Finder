@@ -12,6 +12,7 @@ import { store } from './app/store';
 import SearchBar from './components/SearchBar';
 import AddTool from './components/AddTool';
 import SlidingMenu from './components/SlidingMenu';
+import AddLocation from './pages/AddLocation'
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
 
@@ -26,6 +27,8 @@ function App() {
           <Route path='/register' element={<Register />}/>
           <Route path='/logout' element={<Logout />}/>
           <Route path='/location' element={<LocationDescription />}/>
+          <Route path='/addlocation' element={<AddLocation />} />
+          <Route path="/location/:id" element={<LocationDescription />} exact />
         </Routes>
       </Router>
     </Provider>

@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, useMap, Marker, Popup, LeafletMap } from "reac
 
 import { getLocationsByCoords } from '../services/locationService'
 
+import { Link } from "react-router-dom";
+
 function MapComponent() {
 // TODO re-do this entire file using react-leaflets useMap and useMapEvents!!!!
 
@@ -23,7 +25,7 @@ function MapComponent() {
             let resultJSON = JSON.parse(allLocationsAroundMe)
             resultJSON.map(station => {
             console.log("station: " + station.geolocation.coordinates.reverse());
-            setFitnessStationsAroundMe(prevStations => [...prevStations, station.geolocation.coordinates.reverse()])
+            setFitnessStationsAroundMe(prevStations => [...prevStations, [station.geolocation.coordinates.reverse(), station._id.$oid] ])
             });
           });
         },
@@ -50,10 +52,15 @@ function MapComponent() {
           </Popup>
         </Marker>
         )}
-        {fitnessStationsAroundMe.map((coords, index) => (
-          <Marker position={coords}>
+        {fitnessStationsAroundMe.map((coords) => (
+          <Marker position={coords[0]}>
             <Popup>
-              Fitness No. {index}
+              <Link
+                to={`/location/${coords[1]}`}
+                state={{ id: coords[1] }} // <-- state prop
+              > 
+              Fitness No. {coords[1]}
+              </Link>
             </Popup>
           </Marker>
         ))}
