@@ -77,7 +77,9 @@ function Login() {
           <div className='p-10 mb-10 gridAuthGandF'>
 
             <div className="mt-5">
-              <GoogleComp />
+              <Link to={"http://localhost:5000/api/users/auth/google"}>
+                <GoogleComp />
+              </Link>
             </div>
 
             <div className="">

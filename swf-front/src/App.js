@@ -13,6 +13,7 @@ import SearchBar from './components/SearchBar';
 import AddTool from './components/AddTool';
 import SlidingMenu from './components/SlidingMenu';
 import AddLocation from './pages/AddLocation'
+import SuccessfulGoogleLogin from './pages/SuccessfulGoogleLogin';
 
 const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/logout' element={<Logout />}/>
           <Route path='/location' element={<LocationDescription />}/>
           <Route path='/addlocation' element={<AddLocation />} />
+          <Route path='/SuccessfulGoogleLogin' element={<SuccessfulGoogleLogin />} />
           <Route path="/location/:id" element={<LocationDescription />} exact />
         </Routes>
       </Router>

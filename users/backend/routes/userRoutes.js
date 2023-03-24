@@ -21,12 +21,15 @@ router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/api/users/login' }),
   function(req, res) {
     let user = req.user
-    res.status(200).json({
-      _id: user.id,
-      name: user.name,
-      email: user.email,
-      token: generateToken(user.id) 
-    })
+    // res.status(200).json({
+    //   _id: user.id,
+    //   name: user.name,
+    //   email: user.email,
+    //   token: generateToken(user.id) 
+    // })
+
+    res.redirect("http://localhost:3000/SuccessfulGoogleLogin?id=" + user.id + "&name=" + user.name + "&email=" + user.email +  "&token=" + generateToken(user.id))
+
   });
 
 module.exports = router
