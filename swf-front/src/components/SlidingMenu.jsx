@@ -6,7 +6,7 @@ const SlidingMenu = () => {
   const [isLocalStorageEmpty, setIsLocalStorageEmpty] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem('test')) {
+    if (!localStorage.getItem('token')) {
         setIsLocalStorageEmpty(true);}}, []);
 
   const toggleMenu = () => {
