@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Components
 import MapComponent from './components/MapComponent';
@@ -13,6 +13,7 @@ import SearchBar from './components/SearchBar';
 import AddTool from './components/AddTool';
 import SlidingMenu from './components/SlidingMenu';
 import AddLocation from './pages/AddLocation'
+import SuccessfulGoogleLogin from './pages/SuccessfulGoogleLogin';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path='/logout' element={<Logout />}/>
           <Route path='/location' element={<LocationDescription />}/>
           <Route path='/addlocation' element={<AddLocation />} />
+          <Route path='/SuccessfulGoogleLogin' element={<SuccessfulGoogleLogin />} />
           <Route path="/location/:id" element={<LocationDescription />} exact />
         </Routes>
       </Router>
