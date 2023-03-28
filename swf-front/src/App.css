@@ -198,7 +198,7 @@ input[type=email].Email {
   background: #221F1F;
   font: 14px "Lato", Futura, sans-serif;
   font-style: semiBold;
-  margin: 20px;
+  width: 100%;
   color: white;
 }
 

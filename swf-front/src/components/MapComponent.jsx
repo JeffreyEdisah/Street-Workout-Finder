@@ -51,20 +51,20 @@ function MapComponent() {
             École Centrale Marseille
           </Popup>
         </Marker>
-      )}
-      {fitnessStationsAroundMe.map((coords) => (
-        <Marker position={coords[0]}>
-          <Popup>
-            <Link
-              to={`/location/${coords[1]}`}
-              state={{ id: coords[1] }} // <-- state prop
-            >
-              Fitness No. {coords[1]}
-            </Link>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+        )}
+        {fitnessStationsAroundMe.map((coords) => (
+          <Marker position={coords[0]}>
+            <Popup>
+              <Link
+                to={`/location/${coords[1]}`}
+                state={{ id: coords[1] }} // <-- state prop
+              > 
+              Fitness {coords[1]}
+              </Link>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
   );
 }
 
