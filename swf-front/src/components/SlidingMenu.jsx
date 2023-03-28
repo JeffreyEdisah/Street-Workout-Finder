@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState,  useEffect  } from 'react';
 import menuIcon from '../images/charm_menu-hamburger.svg';
 
 const SlidingMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLocalStorageEmpty, setIsLocalStorageEmpty] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem('test')) {
+        setIsLocalStorageEmpty(true);}}, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -26,10 +31,11 @@ const SlidingMenu = () => {
         </div>
 
         <div className="menu-content">
-          <div className='menu-item'> <a href="./logout"> Se déconnecter </a></div>
+          {isLocalStorageEmpty ? (<div className='menu-item'> <a href="./login"> Se connecter </a></div> 
+          ) : (<div className='menu-item'> <a href="./logout"> Se déconnecter </a></div>)}
           <div className='menu-item'> <a href="./login"> Favoris </a></div>
           <div className='menu-item'> <a href="./login"> Profil </a></div>
-          <div className='menu-item' id="suppression">Supprimer son compte</div>
+          {isLocalStorageEmpty ? null : <div className='menu-item' id="suppression">Supprimer son compte</div>}
         </div>
       </div>
     </div>

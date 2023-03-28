@@ -1,10 +1,8 @@
-import { useState } from 'react';
+import React from 'react';
 
 function AddTool() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  const redirectToPage = () => {
+    window.location.href = './addlocation';
   };
 
   return (
@@ -25,34 +23,10 @@ function AddTool() {
           color: '#fff',
           cursor: 'pointer',
         }}
-        onClick={toggleMenu}
+        onClick={redirectToPage}
       >
         <span style={{color:'black'}}>+</span>
       </div>
-      {menuOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '10vh',
-            left: '50vw',
-            width: '100px',
-            height: '70px',
-            borderRadius: '10px',
-            backgroundColor: '#fff',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            padding: '10px',
-            zIndex: '900'
-          }}
-        >
-          <a href="#">Option 1</a>
-          <a href="#">Option 2</a>
-          <a href="#">Option 3</a>
-        </div>
-      )}
     </div>
   );
 }

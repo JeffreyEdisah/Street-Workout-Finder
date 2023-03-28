@@ -14,8 +14,6 @@ import AddTool from './components/AddTool';
 import SlidingMenu from './components/SlidingMenu';
 import AddLocation from './pages/AddLocation'
 
-const settingsItems = ['Account', 'Preferences', 'Security', 'Edit Profile', 'Logout'];
-
 function App() {
   return (
     <>
