@@ -359,10 +359,9 @@ font-family: 'Lato';
 }
 
 #suppression{
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  width: 50%;
-  padding-right: 5%;
+  width: 95%;
 }
 
 a {
