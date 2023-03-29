@@ -12,11 +12,8 @@ function Head(props) {
       </p>
       <div className='common-intel'>
         <p>Ouvert</p>
-        <div className='note'>
-          <p>NOTE</p>
-        </div>
       </div>
-    </div>
+      </div>
   );
 }
 

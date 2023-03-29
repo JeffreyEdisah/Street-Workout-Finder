@@ -25,7 +25,7 @@ function MapComponent() {
             let resultJSON = JSON.parse(allLocationsAroundMe)
             resultJSON.map(station => {
               console.log("station: " + station.geolocation.coordinates.reverse());
-              setFitnessStationsAroundMe(prevStations => [...prevStations, [station.geolocation.coordinates.reverse(), station._id.$oid]])
+              setFitnessStationsAroundMe(prevStations => [...prevStations, [station.geolocation.coordinates.reverse(), station._id.$oid, station.name]])
             });
           });
         },
@@ -59,7 +59,7 @@ function MapComponent() {
                 to={`/location/${coords[1]}`}
                 state={{ id: coords[1] }} // <-- state prop
               > 
-              Fitness {coords[1]}
+              {coords[2]}
               </Link>
             </Popup>
           </Marker>

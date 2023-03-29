@@ -4,6 +4,8 @@ import TagContainer from "../components/TagContainer";
 import CommentContainer from "../components/CommentContainer";
 import { useLocation } from "react-router-dom";
 import { getLocationById } from "../services/locationService";
+import { Link } from "react-router-dom";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 function LocationDescription(props) {
 
@@ -15,17 +17,21 @@ function LocationDescription(props) {
         const data = await getLocationById(state.id);
         setObject(data);
         }
-        fetchData()
-        .catch(console.error);},[state.id, object])
+        fetchData();},[state.id, object])
 
     return (
+        <>
+        <Link to={"/"}>
+        <BsArrowLeftShort className="arrow" size={30} />
+      </Link>
         <div className="location-page">
             <Head name={object.name} street={object.address?.street} zipCode={object.address?.zipCode} city={object.address?.city} />
             <hr />
-            {/* <TagContainer />
+            <TagContainer />
             <hr />
-            <CommentContainer /> */}
+            <CommentContainer />
         </div>
+        </>
     );
 }
 
