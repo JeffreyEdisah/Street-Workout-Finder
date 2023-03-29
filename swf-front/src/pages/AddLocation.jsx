@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import InputField from '../components/InputField'
 import { useNavigate } from 'react-router-dom'
 import { addLocationWithcoordinates, reset } from '../services/auth/authSlice'
+import { Link } from "react-router-dom";
+import { BsArrowLeftShort } from 'react-icons/bs'
 
 function AddLocation() {
 
@@ -69,6 +71,9 @@ function AddLocation() {
 
   return (
     <div>
+      <Link to={"/"}>
+        <BsArrowLeftShort size={30} />
+      </Link>
       <div className="p-10 mb-10">
         <div className='mb-10 mt-10 left'>Ajoutez un nouvel emplacement ? </div>
       </div>
