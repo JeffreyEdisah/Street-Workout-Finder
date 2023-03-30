@@ -2,7 +2,12 @@ import React from 'react';
 
 function AddTool() {
   const redirectToPage = () => {
-    window.location.href = './addlocation';
+    if (localStorage.getItem("token")) {
+      window.location.href = './addlocation';
+    } else {
+      window.location.href = './login';
+    }
+
   };
 
   return (

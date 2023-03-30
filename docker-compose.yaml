@@ -1,0 +1,18 @@
+services:
+  user:
+    image: swf_user
+    ports:
+      - '5010:5010'
+
+  location:
+    image: swf_location
+    ports:
+      - '5000:5000'
+
+  front:
+    image: swf_front
+    ports:
+      - '3000:3000'
+    depends_on:
+      - "user"
+      - "location"

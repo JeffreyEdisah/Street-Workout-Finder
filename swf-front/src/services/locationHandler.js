@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = '/locations/add'
+const API_URL = 'http://localhost:5000/locations/add'
 
 const addLocationWithcoordinates = async (locationData) => {
 

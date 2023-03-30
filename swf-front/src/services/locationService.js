@@ -1,8 +1,8 @@
 //const API_URL_findbyCoords = 'https://6awv2ej4h9.execute-api.eu-central-1.amazonaws.com/locations/findByCoords?';
 //const API_URL_findbyId = 'https://6awv2ej4h9.execute-api.eu-central-1.amazonaws.com/locations/findByID';
 
-const API_URL_findbyCoords_test = '/locations/findByCoords?'
-const API_URL_findbyId_test = '/locations/findByID/'
+const API_URL_findbyCoords_test = 'http://localhost:5000/locations/findByCoords?'
+const API_URL_findbyId_test = 'http://localhost:5000/locations/findByID/'
 
 export async function getLocationsByCoords(lon, lat, maxDst = 50000) {
     try {
