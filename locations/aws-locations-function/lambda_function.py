@@ -5,10 +5,10 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
 # Mongo Configuration
-mongoUsername = 'swfDatabaseUser'
+mongoUsername = 'StreetWorkoutFinder'
 mongoPassword = os.environ.get('SWF_MONGO_PASSWORD')
 mongoDatabase = 'streetWorkoutFinder'
-mongoURI = "mongodb+srv://{}:{}@cluster0.rqrjnrv.mongodb.net/".format(mongoUsername, mongoPassword)
+mongoURI = "mongodb+srv://{}:{}@cluster0.cri1oxc.mongodb.net/".format(mongoUsername, mongoPassword)
 
 # other config
 defaultMaxDistance = 10000 # default distance to search in geospatial search (in meters)
@@ -99,31 +99,31 @@ def lambda_handler(event, context):
         # here, we select the correct route and method and execute the corresponding code
         if route == '/locations/add':
             # TODO extract parameters from request body and add the location to the database
-            responeBody = add()
+            responseBody = add()
 
         elif route == '/locations/findByCoords':
             lon = parameters['lon']
             lat = parameters['lat']
 
-            responeBody = findByCoords(lon, lat, maxDst = defaultMaxDistance)
+            responseBody = findByCoords(lon, lat, maxDst = defaultMaxDistance)
 
         elif route == 'locations/findByID':
             id = parameters['id']
-            responeBody = findByID(id)
+            responseBody = findByID(id)
 
         elif route == '/locations/findAll':
-            responeBody = findAll()
+            responseBody = findAll()
 
         elif route == '/locations':
             if method == 'PUT':
                 # update location
                 id = parameters['id']
-                responeBody = update(id)
+                responseBody = update(id)
 
             elif method == 'DELETE':
                 # delete location
                 id = parameters['id']
-                responeBody = delete(id)
+                responseBody = delete(id)
             else:
                 # unknown method
                 # return wrong method
@@ -134,7 +134,7 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': responeBody
+            'body': responseBody
         }
 
     except ConnectionFailure:

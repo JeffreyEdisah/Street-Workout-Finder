@@ -1,16 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
-
 from flask_pymongo import PyMongo
-import json
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 from pymongo import GEOSPHERE # for GeoJSON stuff
+from auth_middleware import token_required
 
 import os
 
 # Mongo Configuration
-mongoUsername = 'swfDatabaseUser'
+mongoUsername = 'StreetWorkoutFinder'
 mongoPassword = os.environ.get('SWF_MONGO_PASSWORD')
 mongoDatabase = 'streetWorkoutFinder'
 
@@ -21,8 +20,12 @@ defaultMaxDistance = 10000 # default distance to search in geospatial search (in
 app = Flask(__name__)
 CORS(app)
 # app.config["MONGO_URI"] = "mongodb://localhost:27017/streetWorkoutFinder" # the database name is streetWorkoutFinder, the collection name is "locations". The database and collection are created automatically when you insert the first document (if it does not exist).
-app.config["MONGO_URI"] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.rqrjnrv.mongodb.net/' + mongoDatabase+ '?retryWrites=true&w=majority'
-mongo = PyMongo(app)
+app.config["MONGO_URI"] = 'mongodb+srv://' + mongoUsername + ':' + mongoPassword + '@cluster0.cri1oxc.mongodb.net/?retryWrites=true&w=majority'
+mongo = PyMongo(app).cx[mongoDatabase]
+
+SECRET_KEY = os.environ.get('SECRET_KEY') or 'this is a secret'
+print(SECRET_KEY)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route("/")
 def hello():
@@ -31,7 +34,7 @@ def hello():
     locations = mongo.db.locations.find({"name": "test"}) # find all documents with the name "test"
     mongo.db.equipement.insert_one({"name": "barre de traction", "state": "bon état"})
     equipement = mongo.db.equipement.find({"name": "barre de traction"})
-    return (locations[0]["name"],equipement[0]["name"])
+    return (locations[0]["name"], equipement[0]["name"])
 
 ####################
 # CRUD starts here #
@@ -39,6 +42,7 @@ def hello():
 
 # add a new item to the database
 @app.route("/locations/add", methods = ["POST"])
+@token_required
 def create():
     location = request.get_json()
     mongo.db.locations.insert_one(location)
@@ -55,8 +59,8 @@ def findLocationsByCoords():
         dst = defaultMaxDistance
     else:
         dst = request.args.get('maxDst', type=int)
-    
-    query = {"location": {"$nearSphere": { "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
+    mongo.db.locations.create_index([("geolocation", GEOSPHERE)])
+    query = {"geolocation": {"$nearSphere": {"type":"Point", "coordinates": [ lon, lat ] }, "$maxDistance": dst}}
     mongoResults = dumps(list(mongo.db.locations.find(query)))
     return mongoResults
 
@@ -74,6 +78,7 @@ def readall():
 
 # update a location (identified by OID)
 @app.route("/locations/<id>",methods = ["PUT"])
+@token_required
 def update(id):
      updatedLocation = request.get_json()
      mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
@@ -83,11 +88,13 @@ def update(id):
 
 # delete a location (identified by OID)
 @app.route("/locations/<id>",methods =["DELETE"])
+@token_required
 def delete(id):
     mongo.db.locations.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.locations.delete_one({"_id": ObjectId(id)})
 
-@app.route("/equipement/add")
+@app.route("/equipement/add", methods = ["POST"])
+@token_required
 def createEquipement():
     currentEquipement = request.get_json()
     mongo.db.equipement.insert_one(currentEquipement)
@@ -98,13 +105,14 @@ def readEquipement(id):
     currentEquipement = mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
     return dumps(currentEquipement)
 
-@app.route("/equipement")
-def readEquipement(id):
+@app.route("/equipements")
+def readEquipements():
     currentEquipements = mongo.db.equipement.find()
     return dumps(currentEquipements)
 
 @app.route("/locations/<id>",methods = ["PUT"])
-def update(id):
+@token_required
+def updateEquipement(id):
      updatedEquipement = request.get_json()
      mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
      mongo.db.equipement.update_one({"_id": ObjectId(id)}, {set: updatedEquipement})
@@ -112,6 +120,6 @@ def update(id):
      return dumps(currentEquipement)    
 
 @app.route("/equipement/<id>")
-def readEquipement(id):
+def deleteEquipement(id):
     mongo.db.equipement.find_one_or_404({"_id": ObjectId(id)})
     mongo.db.equipement.delete_one({"_id": ObjectId(id)})

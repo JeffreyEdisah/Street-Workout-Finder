@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Street Workout Finder",
+  "name": "Street Workout Finder (SWF)",
   "icons": [
     {
       "src": "favicon.ico",

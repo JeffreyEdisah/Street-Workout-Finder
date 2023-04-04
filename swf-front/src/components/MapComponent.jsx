@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup, LeafletMap } from "react-leaflet";
 
-import { getAllLocations } from '../services/locationService'
+import { getLocationsByCoords } from '../services/locationService'
+
+import { Link } from "react-router-dom";
 
 function MapComponent() {
-// TODO re-do this entire file using react-leaflets useMap and useMapEvents!!!!
+  // TODO re-do this entire file using react-leaflets useMap and useMapEvents!!!!
 
   const centraleMarseilleCoords = [43.342700, 5.436710];
   let [userCoords, setUserCoords] = useState(null);
@@ -19,11 +21,11 @@ function MapComponent() {
       navigator.geolocation.getCurrentPosition(
         position => {
           setUserCoords([position.coords.latitude, position.coords.longitude]);
-          getAllLocations(position.coords.longitude, position.coords.latitude, maxSearchDistance).then((allLocationsAroundMe) => {
+          getLocationsByCoords(position.coords.longitude, position.coords.latitude, maxSearchDistance).then((allLocationsAroundMe) => {
             let resultJSON = JSON.parse(allLocationsAroundMe)
             resultJSON.map(station => {
-              console.log("station: " + station.location.coordinates.reverse());
-              setFitnessStationsAroundMe(prevStations => [...prevStations, station.location.coordinates.reverse()])
+              console.log("station: " + station.geolocation.coordinates.reverse());
+              setFitnessStationsAroundMe(prevStations => [...prevStations, [station.geolocation.coordinates.reverse(), station._id.$oid, station.name]])
             });
           });
         },
@@ -36,24 +38,29 @@ function MapComponent() {
       setError("Geolocation is not supported by this browser.");
     }
   }, []);
-  
+
   return (
-      <MapContainer center={userCoords ? userCoords : centraleMarseilleCoords} zoom={zoom} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {!userCoords && (
+    <MapContainer center={userCoords ? userCoords : centraleMarseilleCoords} zoom={zoom} scrollWheelZoom={true}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {!userCoords && (
         <Marker position={centraleMarseilleCoords}>
           <Popup>
             École Centrale Marseille
           </Popup>
         </Marker>
         )}
-        {fitnessStationsAroundMe.map((coords, index) => (
-          <Marker position={coords}>
+        {fitnessStationsAroundMe.map((coords) => (
+          <Marker position={coords[0]}>
             <Popup>
-              Fitness No. {index}
+              <Link
+                to={`/location/${coords[1]}`}
+                state={{ id: coords[1] }} // <-- state prop
+              > 
+              {coords[2]}
+              </Link>
             </Popup>
           </Marker>
         ))}

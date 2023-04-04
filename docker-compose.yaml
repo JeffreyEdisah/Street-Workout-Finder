@@ -1,0 +1,18 @@
+services:
+  user:
+    image: alderoc/swf-user:latest
+    ports:
+      - '5010:5010'
+
+  location:
+    image: alderoc/swf-location:latest
+    ports:
+      - '5000:5000'
+
+  front:
+    image: alderoc/swf-front:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - "user"
+      - "location"
